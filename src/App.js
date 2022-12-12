@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import {useState} from "react"
+import LuhnCheck from "./components/LuhnCheck";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Form from "./components/Form";
+
+export default function App () {
+  const [num, setNum] = useState("")
+  const [errorMessage, setErrorMessage] = useState("")
+
+  const validateNumber = async (validateNum) => {
+    try {
+    // const response = await fetch(validateNum)
+    // const data = response.reverse()
+    setNum(validateNum)
+  } catch (err) {
+    console.error(err)
+    setErrorMessage(err.message)
+  }
+  // setNum(validateNum)
 }
 
-export default App;
+  return (
+    <>
+      <h1>Luhn Algorithm</h1>
+      <Form numberValidated={validateNumber}/>
+      <div>{errorMessage ? `Error:${errorMessage}` : ""}</div>
+      <LuhnCheck num={num} />
+    </>
+  )
+}
