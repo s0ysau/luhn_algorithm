@@ -1,3 +1,14 @@
+body {
+  display: flex;
+  justify-content: center;
+  background-color: lightseagreen;
+}
+
+.title,
+.result {
+  color: white
+}
+
 .input-field {
   width: 220px;
 }

@@ -1,8 +1,7 @@
-import { useState, useEffect } from "react"
+import { useState } from "react"
 
 export default function Form (props) {
   const [validateNum, setValidateNum] = useState("")
-  const [errorMessage, setErrorMessage] = useState("")
 
   const handleChange = (evt) => {
     const noLetters = evt.target.value.replace(/[^0-9.]/g, '')
@@ -11,14 +10,6 @@ export default function Form (props) {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    // const checkLength = new Promise ((resolve, reject) => {
-    //   if (validateNum.length === 16) {
-    //     resolve(props.numberValidated(validateNum))
-    //   } else {
-    //     const err = "The number you have entered is incorrect."
-    //     reject(err)
-    //   }
-    // })
     props.numberValidated(validateNum)
   }
 

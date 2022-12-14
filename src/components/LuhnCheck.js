@@ -1,30 +1,48 @@
-export default function LuhnCheck (props) {
-  const testNum = props.num
+import {useEffect, useState} from "react"
+import Display from "./Display"
 
-  const toArr = testNum.split('').reverse()
-  const odds = toArr.filter((a,i) => i % 2 === 0)
-                    .map(i => i * 1)
-  const evens = toArr.filter((a,i) => i % 2 === 1)
-                    .map(i => i * 2)
-                    .toString()
-                    .split('')
-                    .filter((i) => i % 1 === 0)
-                    .map(i => i * 1)
-  const sum = odds.concat(evens).reduce((a,c) => {
-    return a + c
-  }, 0)                    
+export default function LuhnCheck ({num}) {
+  const testNum = num
+
+  const algorithmCheck = (testNum) => {
+    const toArr = testNum.split('')
+                          .reverse()
+                          .map(i => i * 1)
+    const odds = toArr.filter((a,i) => i % 2 === 0)
+    const evens = toArr.filter((a,i) => i % 2 === 1)
+                      .map(i => i * 2)
+                      .toString()
+                      .split('')
+                      .filter((i) => i % 1 === 0)
+                      .map(i => i * 1)
+    const sum = odds.concat(evens).reduce((a,c) => {
+      return a + c
+    }, 0)          
+    return sum
+  }
+
 
   return (
     <>
-        {
-          sum % 10 === 0 ? (
-          <div>
-            <h1>Valid Number</h1>
-          </div>
-          ) : (
-          <h1>You have entered an invalid number</h1>
-          )
-        }
-    </>
+      {
+        algorithmCheck(testNum) % 10 === 0 && testNum.length == 16 ? (
+          <h2 className="result">Valid Number</h2>
+        ) : (
+        <h2 className="result">You have entered an invalid number</h2>
+        )
+      }
+  </>
   )
 }
+
+/* 
+    <>
+      {
+        algorithmCheck(testNum) % 10 === 0 && testNum.length == 16 ? (
+          <h2 className="result">Valid Number</h2>
+        ) : (
+        <h2 className="result">You have entered an invalid number</h2>
+        )
+      }
+    </>
+*/
